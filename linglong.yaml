@@ -1,0 +1,27 @@
+version: "1"
+
+package:
+  id: io.github.AppleSAWS
+  name: AppleSAWS
+  version: 1.2.0.1
+  kind: app
+  description: |
+    Apple Software Analysis WorkShop - Tools for the Apple II
+
+command:
+  - /opt/apps/io.github.AppleSAWS/files/bin/AppleSAWS
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/wjyrich/AppleSAWS.git
+    version: master
+    commit: 32daabaa9a669d17b3ce64b5da9e40129f6976c9
+
+build: |
+  cd /project/linglong/sources/AppleSAWS.git
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install
